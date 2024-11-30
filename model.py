@@ -1,51 +1,18 @@
-# import the Torch package to save your day
-# transforms are used to preprocess the images, e.g. crop, rotate, normalize, etc
 import torch
+import numpy as np
+import torch.nn as nn
+import torch.nn.functional as F
+import torch.optim as optim
+import time
 from torchvision import datasets,transforms
-
-# specific the data path in which you would like to store the downloaded files
-# here, we save it to the folder called "mnist_data"
-# ToTensor() here is used to convert data type to tensor, so that can be used in network
 
 train_dataset = datasets.MNIST(root='./mnist_data/', train=True, transform=transforms.ToTensor(), download=True)
 test_dataset = datasets.MNIST(root='./mnist_data/', train=False, transform=transforms.ToTensor(), download=True)
 
-print(train_dataset)
-
 batchSize=128
 
-#only after packed in DataLoader, can we feed the data into the neural network iteratively
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batchSize, shuffle=True)
 test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=batchSize, shuffle=False)
-
-
-
-# package we used to manipulate matrix
-import numpy as np
-# package we used for image processing
-from matplotlib import pyplot as plt
-from torchvision.utils import make_grid
-
-def imshow(img):
-    npimg = img.numpy()
-    #transpose: change array axis to correspond to the plt.imshow() function     
-    plt.imshow(np.transpose(npimg, (1, 2, 0))) 
-    plt.show()
-
-# load the first 16 training samples from next iteration
-# [:16,:,:,:] for the 4 dimension of examples, first dimension take first 16, other dimension take all data
-# arrange the image in grid
-examples, _ = next(iter(train_loader))
-example_show=make_grid(examples[:16,:,:,:], 4)
-
-# then display them
-imshow(example_show)
-
-
-
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
 
 # Network Parameters
 num_hidden_1 = 256  # 1st layer num features
@@ -84,8 +51,6 @@ model = Autoencoder(num_input, num_hidden_1, num_hidden_2)
 # If using GPU, model need to be set on cuda()
 model.cuda()
 
-
-
 # define loss and parameters
 optimizer = optim.Adam(model.parameters())
 epoch = 100
@@ -93,6 +58,7 @@ epoch = 100
 loss_function = nn.MSELoss()
 
 print('====Training start====')
+timerstart = time.time()
 for i in range(epoch):
     train_loss = 0
     for batch_idx, (data, _) in enumerate(train_loader):
@@ -113,17 +79,15 @@ for i in range(epoch):
         loss.backward()
         train_loss += loss.item()
         
-        # update the weight based on the gradient calculated
+        # update the weight based on the gradient calculated``
         optimizer.step()
         
     if i%10==0:    
-        print('====> Epoch: {} Average loss: {:.9f}'.format(i, train_loss ))
+        print('====> Epoch: {} Average loss: {:.9f}'.format(i, train_loss )+" Time: "+str(int(time.time() - timerstart)))
 print('====Training finish====')
 
 # load 16 images from testset
 inputs, _ = next(iter(test_loader))
-inputs_example = make_grid(inputs[:16,:,:,:],4)
-imshow(inputs_example)
 
 #convert from image to tensor
 inputs=inputs.cuda()
@@ -136,12 +100,6 @@ outputs=model(inputs)
 outputs=torch.reshape(outputs,(-1,1,28,28))
 outputs=outputs.detach().cpu()
 
-#show the output images
-outputs_example = make_grid(outputs[:16,:,:,:],4)
-imshow(outputs_example)
-
-
-
 # get 100 image-label pairs from training set
 x_train, y_train = next(iter(train_loader))
 
@@ -152,26 +110,12 @@ candidates = np.random.choice(batchSize, 10*10)
 x_train = x_train[candidates]
 y_train = y_train[candidates]
 
-# display the selected samples and print their labels
-
-imshow(make_grid(x_train[:100,:,:,:],10))
-print(y_train.reshape(10, 10))
-
-
-
 # get 100 image-label pairs from test set
 x_test, y_test = next(iter(train_loader))
 candidates_test = np.random.choice(batchSize, 10*10)
 
 x_test = x_test[candidates_test]
 y_test = y_test[candidates_test]
-
-# display the selected samples and print their labels
-imshow(make_grid(x_test[:100,:,:,:],10))
-
-print(y_test.reshape(10, 10))
-
-
 
 # compute the representations of training and test samples
 h_train=model.encoder(torch.reshape(x_train.cuda(),(-1,784)))
@@ -182,6 +126,5 @@ MSEs = np.mean(np.power(np.expand_dims(h_test.detach().cpu(), axis=1) - np.expan
 neighbours = MSEs.argmin(axis=1)
 predicts = y_train[neighbours]
 
-# print(np.stack([y_test, predicts], axis=1))
 print('Recognition accuracy according to the learned representation is %.1f%%' % (100 * (y_test == predicts).numpy().astype(np.float32).mean()))
 

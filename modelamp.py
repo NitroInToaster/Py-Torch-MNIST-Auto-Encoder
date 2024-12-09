@@ -55,7 +55,7 @@ class Autoencoder(nn.Module):
 # When initialzing, it will run __init__() function as above
 model = Autoencoder(num_input, num_hidden_1, num_hidden_2, num_hidden_3)
 # If using GPU, model need to be set on cuda()
-model.cuda()
+#model.cuda()
 
 # define loss and parameters
 optimizer = optim.Adam(model.parameters(), lr=1e-4)
@@ -70,7 +70,7 @@ timerstart = time.time()
 for i in range(epoch):
     train_loss = 0
     for batch_idx, (data, _) in enumerate(train_loader):
-        data = data.cuda()
+        #data = data.cuda()
         inputs = torch.reshape(data, (-1, 784))
 
         optimizer.zero_grad()
@@ -139,3 +139,7 @@ torch.save(model, "model_saves\model.pt")
 # model = TheModelClass(*args, **kwargs)
 # model.load_state_dict(torch.load(PATH, weights_only=True))
 # model.eval()
+
+#autoencoder per numer
+#najmniejszy błąd klasa
+#10 autoencoderów???

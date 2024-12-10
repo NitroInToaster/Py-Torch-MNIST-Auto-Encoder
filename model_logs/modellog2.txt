@@ -1,0 +1,13 @@
+====Training start====
+====> Epoch: 0 Average loss: 30.596528728
+====> Epoch: 10 Average loss: 5.622765290
+====> Epoch: 20 Average loss: 3.422860805
+====> Epoch: 30 Average loss: 2.578537441
+====> Epoch: 40 Average loss: 2.147212013
+====> Epoch: 50 Average loss: 1.877825765
+====> Epoch: 60 Average loss: 1.679357214
+====> Epoch: 70 Average loss: 1.528974118
+====> Epoch: 80 Average loss: 1.413322099
+====> Epoch: 90 Average loss: 1.327545097
+====Training finish====
+Recognition accuracy according to the learned representation is 60.0%

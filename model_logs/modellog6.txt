@@ -1,0 +1,17 @@
+num_hidden_1 = 512
+num_hidden_2 = 256
+num_hidden_3 = 128
+
+====Training start====
+====> Epoch: 0 Average loss: 37.635948457 Time: 7
+====> Epoch: 10 Average loss: 7.461919717 Time: 76
+====> Epoch: 20 Average loss: 4.932525015 Time: 144
+====> Epoch: 30 Average loss: 3.887463315 Time: 213
+====> Epoch: 40 Average loss: 3.330629538 Time: 281
+====> Epoch: 50 Average loss: 2.925522830 Time: 350
+====> Epoch: 60 Average loss: 2.617050737 Time: 419
+====> Epoch: 70 Average loss: 2.368435763 Time: 487
+====> Epoch: 80 Average loss: 2.175575342 Time: 555
+====> Epoch: 90 Average loss: 2.021400697 Time: 623
+====Training finish====
+Recognition accuracy according to the learned representation is 69.0%

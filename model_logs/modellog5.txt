@@ -1,0 +1,23 @@
+def encoder(self, x):
+    x = F.relu(self.fc1(x))
+    x = F.relu(self.fc2(x))
+    return x
+
+def decoder(self, x):
+    x = F.relu(self.fc3(x))
+    x = torch.sigmoid(self.fc4(x))  # Keep sigmoid for the final output to ensure values are between 0 and 1
+    return x
+
+====Training start====
+====> Epoch: 0 Average loss: 19.911844147 Time: 7
+====> Epoch: 10 Average loss: 2.076736117 Time: 71
+====> Epoch: 20 Average loss: 1.413180815 Time: 136
+====> Epoch: 30 Average loss: 1.154447426 Time: 200
+====> Epoch: 40 Average loss: 1.022204213 Time: 264
+====> Epoch: 50 Average loss: 0.941937276 Time: 328
+====> Epoch: 60 Average loss: 0.890867775 Time: 393
+====> Epoch: 70 Average loss: 0.862717902 Time: 456
+====> Epoch: 80 Average loss: 0.842598146 Time: 520
+====> Epoch: 90 Average loss: 0.828425631 Time: 584
+====Training finish====
+Recognition accuracy according to the learned representation is 71.0%

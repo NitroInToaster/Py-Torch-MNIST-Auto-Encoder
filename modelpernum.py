@@ -53,8 +53,8 @@ class Autoencoder(nn.Module):
         return x
 
 # Initialize one autoencoder per digit
-#autoencoders = {digit: Autoencoder(784, 512, 256, 128).cuda() for digit in range(10)}
-autoencoders = {digit: Autoencoder(784, 512, 256, 128) for digit in range(10)}
+autoencoders = {digit: Autoencoder(784, 512, 256, 128).cuda() for digit in range(10)}
+#autoencoders = {digit: Autoencoder(784, 512, 256, 128) for digit in range(10)}
 
 # Training each autoencoder
 loss_function = nn.MSELoss()
@@ -66,8 +66,8 @@ for digit, model in autoencoders.items():
     for epoch in range(epochs):
         train_loss = 0
         for data, _ in train_dataloaders[digit]:
-            #data = data.view(-1, 784).cuda()
-            data = data.view(-1, 784)
+            data = data.view(-1, 784).cuda()
+            #data = data.view(-1, 784)
             optimizer.zero_grad()
             recon = model(data)
             loss = loss_function(recon, data)
@@ -80,8 +80,8 @@ for digit, model in autoencoders.items():
 print("Evaluating models...")
 total, correct = 0, 0
 for data, labels in DataLoader(full_test_dataset, batch_size=batch_size, shuffle=False):
-    #data = data.view(-1, 784).cuda()
-    data = data.view(-1, 784)
+    data = data.view(-1, 784).cuda()
+    #data = data.view(-1, 784)
     reconstruction_errors = []
 
     # Calculate reconstruction errors for each model

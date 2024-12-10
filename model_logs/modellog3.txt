@@ -1,0 +1,17 @@
+batchSize=256
+num_hidden_1 = 512
+num_hidden_2 = 256
+
+====Training start====
+====> Epoch: 0 Average loss: 15.741046388 Time: 5.480901718139648
+====> Epoch: 10 Average loss: 2.765189137 Time: 57.744757413864136
+====> Epoch: 20 Average loss: 1.601823010 Time: 109.15157461166382
+====> Epoch: 30 Average loss: 1.160767219 Time: 160.6451506614685
+====> Epoch: 40 Average loss: 0.946197965 Time: 212.13966584205627
+====> Epoch: 50 Average loss: 0.815308735 Time: 262.8978316783905
+====> Epoch: 60 Average loss: 0.725034717 Time: 314.9120297431946
+====> Epoch: 70 Average loss: 0.658364366 Time: 366.6478900909424
+====> Epoch: 80 Average loss: 0.605989111 Time: 418.49418926239014
+====> Epoch: 90 Average loss: 0.563847825 Time: 469.41942286491394
+====Training finish====
+Recognition accuracy according to the learned representation is 57.0%

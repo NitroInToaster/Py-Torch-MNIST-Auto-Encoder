@@ -1,0 +1,17 @@
+batchSize=64
+num_hidden_1 = 128  # 1st layer num features
+num_hidden_2 = 64  # 2nd layer num features (the latent dim)
+
+====Training start====
+====> Epoch: 0 Average loss: 62.020996436 Time: 6
+====> Epoch: 10 Average loss: 13.504408355 Time: 73
+====> Epoch: 20 Average loss: 8.519882148 Time: 139
+====> Epoch: 30 Average loss: 6.649006756 Time: 206
+====> Epoch: 40 Average loss: 5.625430304 Time: 273
+====> Epoch: 50 Average loss: 5.003280996 Time: 341
+====> Epoch: 60 Average loss: 4.545636870 Time: 409
+====> Epoch: 70 Average loss: 4.203178571 Time: 477
+====> Epoch: 80 Average loss: 3.952366718 Time: 544
+====> Epoch: 90 Average loss: 3.739104410 Time: 610
+====Training finish====
+Recognition accuracy according to the learned representation is 61.0%
